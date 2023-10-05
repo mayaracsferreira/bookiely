@@ -60,16 +60,14 @@ describe('BookResolver', () => {
 
   it('should find and return all books by author', async () => {
     const book = await resolver.booksbyAuthor('Caitlin Doughty')
-    expect(book).toEqual(
-      [
-        {
-          id: 123,
-          title: 'Para toda eternidade'
-        },
-        {
-          id: 321,
-          title: 'Verdades do além túmulo'
-        }]
-    )
+    expect(book).toEqual([
+      {
+        id: 123,
+        title: 'Para toda eternidade'
+      },
+      {
+        id: 321,
+        title: 'Verdades do além túmulo'
+      }])
   });
 });
