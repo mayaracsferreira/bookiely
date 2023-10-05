@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BookResolver } from './book.resolver';
 import { BookService } from './book.service';
 import { Book } from './book.model';
+import { AuthorService } from 'src/author/author.service';
 
 describe('BookResolver', () => {
   let resolver: BookResolver;
@@ -21,9 +22,22 @@ describe('BookResolver', () => {
               id: 1234,
               title: 'O calibã e a bruxa'
             }))
+          }),
+        },
+        {
+          provide: AuthorService,
+          useFactory: () => ({
+            findAllBooksByAuthor: jest.fn((name: string) => ([
+              {
+                id: 123,
+                title: 'Para toda eternidade'
+              },
+              {
+                id: 321,
+                title: 'Verdades do além túmulo'
+              }]))
           })
         }
-
       ],
     }).compile();
 
@@ -42,5 +56,20 @@ describe('BookResolver', () => {
         title: 'O calibã e a bruxa'
       }
     )
-  })
+  });
+
+  it('should find and return all books by author', async () => {
+    const book = await resolver.booksbyAuthor('Caitlin Doughty')
+    expect(book).toEqual(
+      [
+        {
+          id: 123,
+          title: 'Para toda eternidade'
+        },
+        {
+          id: 321,
+          title: 'Verdades do além túmulo'
+        }]
+    )
+  });
 });

@@ -9,7 +9,7 @@ export class Book {
   @Field()
   title: string;
 
-  @Field({ description: 'Book author' })
+  @Field( type => Author, {nullable: false, description: 'Book author'})
   author: Author;
 
   @Field()
