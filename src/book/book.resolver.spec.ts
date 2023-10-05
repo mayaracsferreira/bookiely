@@ -103,4 +103,19 @@ describe('BookResolver', () => {
         title: 'Verdades do além túmulo'
       }])
   });
+
+  describe('create', () => {
+    it('should create a book', async () => {
+      const book = await resolver.create(
+        1234,
+        'O calibã e a bruxa'
+      )
+      expect(book).toEqual(
+        {
+          id: 1234,
+          title: 'O calibã e a bruxa'
+        }
+      )
+    })
+  });
 });
