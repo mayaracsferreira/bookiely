@@ -33,7 +33,7 @@ describe('AuthorResolver', () => {
     expect(resolver).toBeDefined();
   });
 
-  it('should find and return an author', async () => {
+  it('should find an author', async () => {
     const author = await resolver.author(1234)
     expect(author).toEqual(
       {

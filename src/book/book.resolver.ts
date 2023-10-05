@@ -16,6 +16,11 @@ export class BookResolver {
     }
 
     @Query(returns => [Book])
+    async books(){
+        return this.bookService.findAll();
+    }
+
+    @Query(returns => [Book])
     async booksbyAuthor(@Args('name', { type: () => String }) name: string) {
         return this.authorService.findAllBooksByAuthor(name);
     }

@@ -21,7 +21,21 @@ describe('BookResolver', () => {
             findOneById: jest.fn((book: Book) => ({
               id: 1234,
               title: 'O calibã e a bruxa'
-            }))
+            })),
+            findAll: jest.fn((books: [Book]) => ([
+              {
+                id: 1234,
+                title: 'O calibã e a bruxa'
+              },
+              {
+                id: 123,
+                title: 'Para toda eternidade'
+              },
+              {
+                id: 321,
+                title: 'Verdades do além túmulo'
+              }
+            ]))
           }),
         },
         {
@@ -48,8 +62,8 @@ describe('BookResolver', () => {
     expect(resolver).toBeDefined();
   });
 
-  it('should find and return an book', async () => {
-    const book = await resolver.book(1234)
+  it('should find an book', async () => {
+    const book = await resolver.book(1234);
     expect(book).toEqual(
       {
         id: 1234,
@@ -58,7 +72,26 @@ describe('BookResolver', () => {
     )
   });
 
-  it('should find and return all books by author', async () => {
+  it('should find all books', async () => {
+    const books = await resolver.books();
+    expect(books).toEqual(
+      [
+        {
+          id: 1234,
+          title: 'O calibã e a bruxa'
+        },
+        {
+          id: 123,
+          title: 'Para toda eternidade'
+        },
+        {
+          id: 321,
+          title: 'Verdades do além túmulo'
+        }
+      ])
+  });
+
+  it('should find all books by author', async () => {
     const book = await resolver.booksbyAuthor('Caitlin Doughty')
     expect(book).toEqual([
       {
