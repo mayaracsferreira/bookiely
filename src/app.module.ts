@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { AuthorModule } from './author/author.module';
+import { BookModule } from './book/book.module';
 
 @Module({
   imports: [
@@ -13,10 +14,11 @@ import { AuthorModule } from './author/author.module';
       autoSchemaFile: join(process.cwd(), 'src/database/schema.gql'), // the path where the scehma will be created or true to let it in memory
     }),
     AuthorModule,
+    BookModule,
   ],
   controllers: [AppController],
   providers: [
-    AppService,   
+    AppService,
   ],
 })
 export class AppModule { }
