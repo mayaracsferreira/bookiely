@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BookResolver } from './book.resolver';
 import { BookService } from './book.service';
 import { Book } from './book.model';
-import { AuthorService } from 'src/author/author.service';
 
 describe('BookResolver', () => {
   let resolver: BookResolver;
@@ -35,12 +34,7 @@ describe('BookResolver', () => {
                 id: 321,
                 title: 'Verdades do além túmulo'
               }
-            ]))
-          }),
-        },
-        {
-          provide: AuthorService,
-          useFactory: () => ({
+            ])),
             findAllBooksByAuthor: jest.fn((name: string) => ([
               {
                 id: 123,
@@ -50,8 +44,8 @@ describe('BookResolver', () => {
                 id: 321,
                 title: 'Verdades do além túmulo'
               }]))
-          })
-        }
+          }),
+        },
       ],
     }).compile();
 

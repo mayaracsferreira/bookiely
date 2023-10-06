@@ -15,4 +15,8 @@ export class BookService {
     findOneById(id: number) {
         return 'Found one book!';
     }
+
+    findAllBooksByAuthor(name: string) {
+        return 'Found all books from author!';
+    }
 }
